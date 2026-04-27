@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Connection;
 
 import GUI.Loading;
@@ -16,10 +12,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Rizky
- */
+
 public class ConnectionEmail {
     private static final Properties PROPS = new Properties();
 
@@ -31,7 +24,7 @@ public class ConnectionEmail {
         }
     }
     
-    // Check Connection
+
     public static boolean checkConnection() {
         final String username = PROPS.getProperty("email.smtp.username");
         final String password = PROPS.getProperty("email.smtp.password");
@@ -100,15 +93,14 @@ public class ConnectionEmail {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
             message.setSubject(subject);
 
-            // Create the message body part
             MimeBodyPart messageBodyPart = new MimeBodyPart();
             messageBodyPart.setText(body);
 
-            // Create a multipart message
+            
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(messageBodyPart);
 
-            // Add attachments if available
+           
             if (attachmentPaths != null && !attachmentPaths.isEmpty()) {
                 for (String attachmentPath : attachmentPaths) {
                     MimeBodyPart attachmentPart = new MimeBodyPart();
@@ -117,7 +109,6 @@ public class ConnectionEmail {
                 }
             }
 
-            // Set the multipart message as the email's content
             message.setContent(multipart);
 
             Transport.send(message);
